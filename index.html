@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ransomware Decoy Ecosystem</title>
+  <style>
+    /* General Styles */
+    body {
+      background-color: #0A0F1F;
+      color: #FFFFFF;
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      background-color: #1A1E2F;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: #00FFFF;
+    }
+
+    nav a {
+      color: #FFFFFF;
+      text-decoration: none;
+      margin-left: 20px;
+    }
+
+    /* Hero Section */
+    .hero {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 50vh;
+    }
+
+    .glow-button {
+      background-color: #00FF00;
+      color: #0A0F1F;
+      border: none;
+      padding: 15px 30px;
+      font-size: 24px;
+      font-weight: bold;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: box-shadow 0.3s ease;
+    }
+
+    .glow-button:hover {
+      box-shadow: 0 0 20px #00FF00, 0 0 40px #00FF00;
+    }
+
+    
+    .log-display {
+      background-color: #1A1E2F;
+      padding: 20px;
+      margin: 10px auto;
+      width: 80%;
+      height: 45px;
+      overflow-y: auto;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #1A1E2F;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">DecoyEco</div>
+    <nav>
+      <a href="#">Docs</a>
+      <a href="#">Support</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="hero">
+      <button id="startMonitoring" class="glow-button" onclick="runScript()">Start Monitoring</button>
+    </div>
+<div class="log-display">
+    <p></p>
+</div>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2025 DecoyEco. All rights reserved.</p>
+  </footer>
+
+  <script>
+    function runScript() {
+            fetch('/run-script', { method: 'POST' })
+            .then(response => response.json())
+            .then(data => alert(data.message || data.error));
+        }
+  </script>
+</body>
+</html>
