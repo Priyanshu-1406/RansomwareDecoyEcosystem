@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ransomware Decoy Ecosystem</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        pre {
+            background: #eee;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        ul {
+            margin-left: 20px;
+        }
+        a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Ransomware Decoy Ecosystem</h1>
+        
+        <h2>📌 Overview</h2>
+        <p>The <strong>Ransomware Decoy Ecosystem</strong> is a controlled environment designed to detect ransomware activity and analyze its behavior in a secure manner. The system functions by deploying decoy files and monitoring for modification to identify potential ransomware attacks. When suspicious activity is detected, the system takes an instant backup of affected files, logs the activity for future forensics, disbles wifi to prevent futher spreading, and alerts the user via a desktop/email notification.</p>
+        <p>This project is designed to be Windows-based and implemented using <strong>Flask</strong> for the backend with an <strong>HTML & CSS</strong> frontend for user interaction.</p>
+
+        <h2>🛠 Features</h2>
+        <ul>
+            <li><strong>Decoy File Deployment:</strong> Creates multiple decoy files to attract ransomware attacks.</li>
+            <li><strong>Real-Time Monitoring:</strong> Constantly watches for suspicious file access and encryption activity.</li>
+            <li><strong>Backup System:</strong> Takes an time to time backup so that user has access to data even after the attack</li>
+            <li><strong>User Notification:</strong> Sends desktop alerts and alert email when potential modification activity is found.</li>
+            <li><strong>Web-Based Interface:</strong> Provides a user-friendly web dashboard for monitoring and control.</li>
+        </ul>
+
+        <h2>🔧 Installation Guide</h2>
+        
+        <h3>1️⃣ Prerequisites</h3>
+        <p>Ensure you have the following installed before running the project:</p>
+        <ul>
+            <li><strong>Windows OS</strong> (Tested on Windows 10/11)</li>
+            <li><strong>Python 3.8 or later</strong> (<a href="https://www.python.org/downloads/" target="_blank">Download Here</a>)</li>
+            <li><strong>pip</strong> (comes with Python installation)</li>
+        </ul>
+
+        <h3>2️⃣ Required Python Libraries</h3>
+        <p>Install the necessary dependencies using the following command:</p>
+        <pre>pip install -r requirements.txt</pre>
+        <p>If the <code>requirements.txt</code> file is missing, install the libraries manually:</p>
+        <pre>pip install flask watchdog plyer cryptography shutil logging</pre>
+
+        <h3>3️⃣ Running the Project</h3>
+        <p>To start the <strong>Ransomware Decoy Ecosystem</strong>, follow these steps:</p>
+        <pre>python app.py</pre>
+        <p>This will start the Flask server. Open your browser and go to:</p>
+        <pre>http://127.0.0.1:5000</pre>
+        <p>This will launch the web interface for monitoring ransomware activity.</p>
+
+        <h2>📂 Project Structure</h2>
+        <pre>
+            RansomwareDecoyEcosystem/
+            │── backup_directory/       # Stores backed-up files
+            │── base_directory/         # Contains decoy files for ransomware detection
+            │── templates/              # HTML templates for Flask frontend
+            │── alert.py                # Handles notifications for ransomware activity
+            │── app.py                  # Main Flask application file
+            │── backup.py               # Backup management system
+            │── decoy_manager.py        # Manages decoy files
+            │── key.txt                 # Stores encryption keys
+            │── log.py                  # Logs ransomware activity
+            │── main.py                 # Main script to initialize the system
+            
+        </pre>
+
+        <h2>📢 Usage Instructions</h2>
+        <ol>
+            <li>Run the Flask server using <code>python app.py</code>.</li>
+            <li>Open your web browser and go to <code>http://127.0.0.1:5000</code>.</li>
+            <li>The system will create decoy files and monitor them in real time.</li>
+            <li>If ransomware-like behavior is detected, the system will back up affected files and notify you.</li>
+            <li>Check the <code>logs/</code> folder for detailed activity reports.</li>
+        </ol>
+
+        <h2>🚀 Future Enhancements</h2>
+        <ul>
+            <li>Advanced ML-based ransomware detection</li>
+            <li>Cloud backup integration</li>
+            <li>Detailed graphical analytics</li>
+        </ul>
+
+        <h2>🤝 Contribution</h2>
+        <p>Feel free to contribute to this project by submitting pull requests or reporting issues.</p>
+
+        <h2>📜 License</h2>
+        <p>This project is licensed under the <strong>MIT License</strong>.</p>
+
+        <hr>
+        <p>Developed with ❤️ by <strong>Priyanshu Varshney</strong></p>
+    </div>
+</body>
+</html>
+
+
+</body>
+</html>
