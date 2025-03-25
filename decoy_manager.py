@@ -78,7 +78,7 @@ class MyHandler(FileSystemEventHandler):
                         msg.set_content("A file modification has been detected in your system! Please verify if this change was intentional.")
                         MyServer=smtplib.SMTP('smtp.gmail.com',587)
                         MyServer.starttls()
-                        MyServer.login("priyansuvarshney29@gmail.com","pqquptmhkgadlxfy")
+                        MyServer.login("******@gmail.com","*********")
                         MyServer.send_message(msg)
                         MyServer.quit()
                         self.email_sent[event.src_path]=True
