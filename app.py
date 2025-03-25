@@ -13,7 +13,7 @@ def login():
         username=request.form.get('username')
         password=request.form.get('password')
 
-        if username=='admin' and password=='cse212_cs':
+        if username=='*******' and password=='*********':
             return redirect(url_for('home'))
         else:
             return render_template('login.html', error="Invalid Credentials.")
