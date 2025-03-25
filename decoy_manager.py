@@ -74,7 +74,7 @@ class MyHandler(FileSystemEventHandler):
                         msg=EmailMessage()
                         msg['Subject']="Alert!!"
                         msg['From']="Ransomware Detection System"
-                        msg['To']="priyanshuvarshney1406@gmail.com"
+                        msg['To']="*********@gmail.com"
                         msg.set_content("A file modification has been detected in your system! Please verify if this change was intentional.")
                         MyServer=smtplib.SMTP('smtp.gmail.com',587)
                         MyServer.starttls()
