@@ -12,6 +12,15 @@ from plyer import notification
 import smtplib 
 from email.message import EmailMessage
 import subprocess
+import joblib
+model_path="ransomware_model.pkl"
+ml_model=joblib.load(model_path)
+logging.basicConfig(
+         filename="file_activity.log",
+         level=logging.INFO,
+         format="%(asctime)s,%(message)s",
+         datefmt="%Y-%m-%d %H:%M:%S"
+         )
 
 backup_dir='backup_directory'
 folder_name=f"Backup_Folder"
@@ -49,14 +58,15 @@ class MyHandler(FileSystemEventHandler):
         self.email_sent={}
     def on_modified(self, event):
         if not event.is_directory:
-            logging.basicConfig(
-             filename="file_activity.log",
-             level=logging.INFO,
-             format="%(asctime)s - %(message)s",
-             datefmt="%Y-%m-%d %H:%M:%S"
-             )
-            logging.info(f"Modified:{event.src_path}")
+            file_path = event.src_path
+            file_name = os.path.basename(file_path)          
+            file_ext = os.path.splitext(file_path)[1]         
+            try:
+                file_size = os.path.getsize(file_path)        
+            except Exception:
+                file_size = -1  
             
+  
             notification.notify(title='Suspicious Modification Detected!!',
                                 message="Alert: A file has been modified!! Please verify if this change was intentional",app_icon='5173006_alarm_alert_internet_light_security_icon.ico')
             time.sleep(0.2) 
@@ -66,19 +76,27 @@ class MyHandler(FileSystemEventHandler):
                 hasher.update(f.read())
             new_hash=hasher.hexdigest()
             if event.src_path in file_hashes:
-                if file_hashes[event.src_path]!=new_hash:
-                    print(f"New SHA hash:{new_hash}")
-                    file_hashes[event.src_path]=new_hash
+             old_hash = file_hashes[event.src_path]
+             if old_hash != new_hash:
+                    diff_count = sum(1 for a, b in zip(old_hash, new_hash) if a != b)
+                    max_len = max(len(old_hash), len(new_hash))
+                    hash_diff_ratio = diff_count / max_len if max_len else 0
+                    features = [[file_size, hash_diff_ratio]]
+                    prediction = ml_model.predict(features)[0]
 
-                    if not self.email_sent.get(event.src_path,False):
+                    logging.info(f"Modified,{file_path},{file_name},{file_ext},{file_size},{hash_diff_ratio}")
+                    file_hashes[event.src_path]=new_hash
+                    if prediction == 1:  
+                     print("Ransomware detected! Generating alert...")
+                     if not self.email_sent.get(event.src_path,False):
                         msg=EmailMessage()
                         msg['Subject']="Alert!!"
                         msg['From']="Ransomware Detection System"
-                        msg['To']="*********@gmail.com"
+                        msg['To']="***************************"
                         msg.set_content("A file modification has been detected in your system! Please verify if this change was intentional.")
                         MyServer=smtplib.SMTP('smtp.gmail.com',587)
                         MyServer.starttls()
-                        MyServer.login("******@gmail.com","*********")
+                        MyServer.login("**************************","***************")
                         MyServer.send_message(msg)
                         MyServer.quit()
                         self.email_sent[event.src_path]=True
@@ -113,7 +131,6 @@ while time.time() < stop_time:
     time.sleep(1)
 
 print("Script stopped automatically after 6 seconds.")
-
 
 
 
